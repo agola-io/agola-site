@@ -7,7 +7,10 @@ lang: en-US
 
 This is the reference of the `.agola/config.yml` file
 
+
+
 - [Config](#config)
+- [Global](#global)
   - [Version](#version)
   - [Runtimes](#runtimes)
     - [Runtime](#runtime)
@@ -22,48 +25,59 @@ This is the reference of the `.agola/config.yml` file
   - [Pipelines](#pipelines)
     - [Pipeline](#pipeline)
       - [Element](#element)
+  - [Additional types](#additional-types)
+    - [Value](#value)
+    - [As a string](#as-a-string)
+    - [As a project variable](#as-a-project-variable)
+    - [Registry Auth](#registry-auth)
 - [Examples](#examples)
 
 
-| Option    | Type                                                | Description           |
-| --------- | --------------------------------------------------- | --------------------- |
-| version   | String                                              | Config version        |
-| runtimes  | Map: Runtime Name(String) => [Runtime](#runtime)    | Runtimes definitions  |
-| tasks     | Map: Task Name(String) => [Task](#task)             | Tasks definitions     |
-| pipelines | Map: Pipeline Name(String) => [Pipeline](#pipeline) | Pipelines definitions |
+# Global
+
+| Option    | Type                                               | Description           |
+| --------- | -------------------------------------------------- | --------------------- |
+| version   | String                                             | Config version        |
+| runtimes  | Map: RuntimeName(String) => [Runtime](#runtime)    | Runtimes definitions  |
+| tasks     | Map: TaskName(String) => [Task](#task)             | Tasks definitions     |
+| pipelines | Map: PipelineName(String) => [Pipeline](#pipeline) | Pipelines definitions |
 
 ## Version
+
+The config file version
 
 ## Runtimes
 
 ### Runtime
 
-| Option     | Type                          | Description                                                                                                                                                                                   |
-| ---------- | ----------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| type       | String                        | Runtime Type (currently only `pod` is supported)                                                                                                                                              |
-| arch       | String                        | Architecture (valid architectures are: `386` `amd64` `arm` `arm64`                                                                                                                            |
-| containers | List: [Container](#container) | A list of containers, the first container will be the one where the tasks steps will be executed. Other containers may be defined to provide services needed for the task (a database etc...) |
+| Option     | Type                            | Description                                                                                                                                                                                   |
+| ---------- | ------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| type       | String                          | Runtime Type (currently only `pod` is supported)                                                                                                                                              |
+| auth       | [Registry Auth](#registry-auth) | Registry Authentication                                                                                                                                                                       |
+| arch       | String                          | Architecture (valid architectures are: `386` `amd64` `arm` `arm64`                                                                                                                            |
+| containers | List: [Container](#container)   | A list of containers, the first container will be the one where the tasks steps will be executed. Other containers may be defined to provide services needed for the task (a database etc...) |
 
 #### Container
 
-| Option      | Type                                             | Description                                                                        |
-| ----------- | ------------------------------------------------ | ---------------------------------------------------------------------------------- |
-| image       | String                                           | Image to use                                                                       |
-| environment | Map: EnvVar Name(String) => EnvVar Value(String) | Environment variables to set                                                       |
-| working_dir | String                                           | Working dir where the entrypoint will be executed (also used for steps in a task)  |
-| user        | String                                           | The user id or username to use when executing the entrypoint or the task run steps |
+| Option      | Type                                                    | Description                                                                        |
+| ----------- | ------------------------------------------------------- | ---------------------------------------------------------------------------------- |
+| image       | String                                                  | Image to use                                                                       |
+| auth        | [Registry Auth](#registry-auth)                         | Registry Authentication                                                            |
+| environment | Map: EnvVarName(String) => EnvVarValue([Value](#value)) | Environment variables to set                                                       |
+| working_dir | String                                                  | Working dir where the entrypoint will be executed (also used for steps in a task)  |
+| user        | String                                                  | The user id or username to use when executing the entrypoint or the task run steps |
 
 ## Tasks
 
 #### Task
 
-| Option      | Type                                             | Description                                      |
-| ----------- | ------------------------------------------------ | ------------------------------------------------ |
-| runtime     | String                                           | Runtimes to use                                  |
-| steps       | List of Step types                               | Steps definitions                                |
-| environment | Map: EnvVar Name(String) => EnvVar Value(String) | Environment variables to set                     |
-| working_dir | String                                           | The working dir where the steps will be executed |
-| shell       | String                                           | Shell to use (defaults to `/bin/sh -e`)          |
+| Option      | Type                                                    | Description                                      |
+| ----------- | ------------------------------------------------------- | ------------------------------------------------ |
+| runtime     | String                                                  | Runtimes to use                                  |
+| steps       | List of Step types                                      | Steps definitions                                |
+| environment | Map: EnvVarName(String) => EnvVarValue([Value](#value)) | Environment variables to set                     |
+| working_dir | String                                                  | The working dir where the steps will be executed |
+| shell       | String                                                  | Shell to use (defaults to `/bin/sh -e`)          |
 
 ##### Step
 
@@ -136,6 +150,33 @@ In this case the run step name will be the same of the command trimmed at the ma
 | depends        | List: String | Reference to an element name in the pipeline which this element will depend on |
 | ignore_failure | List: String | Don't mark the pipeline as failed if this task is failed                       |
 | approval       | Boolean      | If true the task must be approved before it can start                          |
+
+## Additional types
+
+### Value
+
+A value that can be defined as a string or from a project variable
+
+### As a string
+
+``` yaml
+password: yoursecretpassword
+```
+
+### As a project variable
+
+``` yaml
+password:
+  from_variable: yoursecretpassword
+```
+
+### Registry Auth
+
+| Option   | Type            | Description                                                          |
+| -------- | --------------- | -------------------------------------------------------------------- |
+| type     | String          | Registry authentication type (currently only `default` is supported) |
+| username | [Value](#value) | Registry username. Can be a string or from a variable                |
+| password | [Value](#value) | Registry password. Can be a string or from a variable                |
 
 
 # Examples
