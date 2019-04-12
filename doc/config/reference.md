@@ -26,6 +26,8 @@ This is the reference of the `.agola/config.yml` file
     - [Pipeline](#pipeline)
       - [Element](#element)
   - [Additional types](#additional-types)
+    - [When](#when)
+      - [Example](#example)
     - [Value](#value)
     - [As a string](#as-a-string)
     - [As a project variable](#as-a-project-variable)
@@ -144,14 +146,57 @@ In this case the run step name will be the same of the command trimmed at the ma
 
 #### Element
 
-| Option         | Type         | Description                                                                    |
-| -------------- | ------------ | ------------------------------------------------------------------------------ |
-| task           | String       | Reference to a task name to run inside this element                            |
-| depends        | List: String | Reference to an element name in the pipeline which this element will depend on |
-| ignore_failure | List: String | Don't mark the pipeline as failed if this task is failed                       |
-| approval       | Boolean      | If true the task must be approved before it can start                          |
+| Option         | Type          | Description                                                                                            |
+| -------------- | ------------- | ------------------------------------------------------------------------------------------------------ |
+| task           | String        | Reference to a task name to run inside this element                                                    |
+| ignore_failure | Boolean       | Don't mark the pipeline as failed if this task is failed                                               |
+| approval       | Boolean       | If true the task must be approved before it can start                                                  |
+| depends        | List: String  | Reference to an element name in the pipeline which this element will depend on                         |
+| when           | [When](#when) | Conditions to match to execute this element. If the conditions aren't met then the elements is skipped |
+
 
 ## Additional types
+
+### When
+
+When represent a set of conditions to match
+
+| Option | Type                                                        | Description                                  |
+| ------ | ----------------------------------------------------------- | -------------------------------------------- |
+| branch | String, List of String or map with keys `include`/`exclude` | Match a branch with the specified conditions |
+| tag    | String, List of String or map with keys `include`/`exclude` | Match a tag with the specified conditions    |
+| ref    | String, List of String or map with keys `include`/`exclude` | Match a ref with the specified conditions    |
+
+The value provided to branch/tag/ref can be different:
+* A string
+* A list of strings
+* A map with keys `include` and `exclude` and values string or list of string (like above). In this way the branch/ref/tag must be included and not excluded
+
+The provided strings can be a simple string (the value must match that string) or a regular expression (when enclosed in `/` or `#`)
+
+
+#### Example
+
+``` yaml
+  pipelines:
+    pipeline01:
+      elements:
+        element01:
+          task: task01
+          when:
+            branch: master
+            tag:
+              - v1.0
+              - /v1\..*/
+            ref:
+              include: master
+              exclude: [ '#/refs/pull/.*#' , /refs/heads/branch01 ]
+```
+
+The element `element01` will be executed only if:
+* we are on a branch with value `master`
+* we are on a tag with value `v1.0` or that matches the regexp `v1\..*` (i.e `v1.0`, `v1.2` but not `v10` or `v2`)
+* we are on a ref that match the regexp `/refs/pull/.*` or the value "/refs/heads/branch01`
 
 ### Value
 
