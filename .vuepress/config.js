@@ -42,7 +42,7 @@ function getConfigSidebar(group) {
     {
       title: group,
       collapsable: false,
-      children: ["", "reference"]
+      children: ["", "reference", "caching"]
     }
   ];
 }
