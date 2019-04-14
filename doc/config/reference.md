@@ -22,6 +22,8 @@ This is the reference of the `.agola/config.yml` file
           - [run](#run)
           - [save_to_workspace](#savetoworkspace)
           - [restore_workspace](#restoreworkspace)
+          - [save_cache](#savecache)
+          - [restore_cache](#restorecache)
   - [Pipelines](#pipelines)
     - [Pipeline](#pipeline)
       - [Element](#element)
@@ -124,17 +126,39 @@ In this case the run step name will be the same of the command trimmed at the ma
 
 **content**
 
-| Option     | Type         | Description                                       |
-| ---------- | ------------ | ------------------------------------------------- |
-| source_dir | String       | Source dir where to take the files to save        |
-| dest_dir   | String       | Workspace destination dir where to save the files |
-| paths      | List: String | Contents to save in the workspace                 |
+| Option     | Type         | Description                                                                                                     |
+| ---------- | ------------ | --------------------------------------------------------------------------------------------------------------- |
+| source_dir | String       | Source dir where to take the files to save                                                                      |
+| dest_dir   | String       | Workspace destination dir where to save the files                                                               |
+| paths      | List: String | Contents to save in the workspace. Every path accepts the `**` (doublestar) notation to match all the subchilds |
 
 ###### restore_workspace
 
 | Option   | Type   | Description                                    |
 | -------- | ------ | ---------------------------------------------- |
 | dest_dir | String | Destination dir where to restore the workspace |
+
+###### save_cache
+
+| Option   | Type          | Description                       |
+| -------- | ------------- | --------------------------------- |
+| contents | List: content | Contents to save in the workspace |
+
+**content**
+
+| Option     | Type         | Description                                                                                                                                                             |
+| ---------- | ------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| key        | String       | Cache key to save. It's a template to dynamically generate cache keys based on runtime data. See [caching](caching.md)                                                  |
+| source_dir | String       | Source dir where to take the files to save                                                                                                                              |
+| dest_dir   | String       | Workspace destination dir where to save the files                                                                                                                       |
+| paths      | List: String | Contents to save in the workspace, if empty all the files inside source_dir will be saved. Every path accepts the `**` (doublestar) notation to match all the subchilds |
+
+###### restore_cache
+
+| Option   | Type           | Description                                                                                                                                                                                                                                                             |
+| -------- | -------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| keys     | List of String | List of cache key to restore. Every entry is a template to dynamically generate cache keys based on runtime data. See [caching](caching.md). They'll tried in order until a match by prefix of an existing cache key is found, the newest matching key will be restored |
+| dest_dir | String         | Destination dir where to restore the cache                                                                                                                                                                                                                              |
 
 ## Pipelines
 
