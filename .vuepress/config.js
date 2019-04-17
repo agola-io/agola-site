@@ -42,9 +42,10 @@ function getConfigSidebar(group) {
     {
       title: group,
       collapsable: false,
-      children: ["", "reference", "caching",
+      children: ["reference", "workspaces", "caching",
         {
           title: "Examples",
+          collapsable: false,
           children: ["examples/go"],
         }
       ]
