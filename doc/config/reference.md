@@ -26,7 +26,7 @@ lang: en-US
     - [Value](#value)
       - [As a string](#as-a-string)
       - [As a project variable](#as-a-project-variable)
-    - [Registry Auth](#registry-auth)
+    - [Docker Registry Auth](#docker-registry-auth)
 - [Examples](#examples)
   - [yaml config](#yaml-config)
   - [jsonnet config](#jsonnet-config)
@@ -72,25 +72,27 @@ The config file version. Currently only `v1`.
 
 ### Run
 
-| Option | Type       | Description |
-| ------ | ---------- | ----------- |
-| name   | String     | Run name    |
-| tasks  | List: Task | Run tasks   |
+| Option                 | Type                                                                                         | Description                           |
+| ---------------------- | -------------------------------------------------------------------------------------------- | ------------------------------------- |
+| name                   | String                                                                                       | Run name                              |
+| tasks                  | List: Task                                                                                   | Run tasks                             |
+| docker_registries_auth | Map: RegistryHost(String) => DockerRegistryAuth([DockerRegistryAuth](#docker-registry-auth)) | Docker registries authentication data |
 
 #### Task
 
-| Option         | Type                                                    | Description                                                                                     |
-| -------------- | ------------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
-| name           | String                                                  | Task name                                                                                       |
-| runtime        | [Runtime](#runtime)                                     | Runtime definition                                                                              |
-| steps          | List: [Step](#step)                                     | Steps definitions                                                                               |
-| environment    | Map: EnvVarName(String) => EnvVarValue([Value](#value)) | Environment variables to set                                                                    |
-| working_dir    | String                                                  | The working dir where the steps will be executed (defualt: `~/project`)                         |
-| shell          | String                                                  | Shell to use (defaults to `/bin/sh -e`)                                                         |
-| ignore_failure | Boolean                                                 | Don't mark the run as failed if this task is failed                                             |
-| approval       | Boolean                                                 | If true the task must be approved before it can start                                           |
-| depends        | List: [Depend](#depend)                                 | List of task dependencies and conditions                                                        |
-| when           | [When](#when)                                           | Conditions to match to execute this task. If the conditions aren't met then the task is skipped |
+| Option                 | Type                                                                                         | Description                                                                                     |
+| ---------------------- | -------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
+| name                   | String                                                                                       | Task name                                                                                       |
+| runtime                | [Runtime](#runtime)                                                                          | Runtime definition                                                                              |
+| steps                  | List: [Step](#step)                                                                          | Steps definitions                                                                               |
+| environment            | Map: EnvVarName(String) => EnvVarValue([Value](#value))                                      | Environment variables to set                                                                    |
+| working_dir            | String                                                                                       | The working dir where the steps will be executed (defualt: `~/project`)                         |
+| shell                  | String                                                                                       | Shell to use (defaults to `/bin/sh -e`)                                                         |
+| ignore_failure         | Boolean                                                                                      | Don't mark the run as failed if this task is failed                                             |
+| approval               | Boolean                                                                                      | If true the task must be approved before it can start                                           |
+| depends                | List: [Depend](#depend)                                                                      | List of task dependencies and conditions                                                        |
+| when                   | [When](#when)                                                                                | Conditions to match to execute this task. If the conditions aren't met then the task is skipped |
+| docker_registries_auth | Map: RegistryHost(String) => DockerRegistryAuth([DockerRegistryAuth](#docker-registry-auth)) | Docker registries authentication data                                                           |
 
 ##### Depend
 
@@ -224,19 +226,17 @@ In this case the run step name will be the same of the command trimmed at the ma
 
 #### Runtime
 
-| Option     | Type                            | Description                                                                                                                                                                                   |
-| ---------- | ------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| type       | String                          | Runtime Type (currently only `pod` is supported)                                                                                                                                              |
-| auth       | [Registry Auth](#registry-auth) | Registry Authentication                                                                                                                                                                       |
-| arch       | String                          | Architecture (valid architectures are: `386` `amd64` `arm` `arm64`                                                                                                                            |
-| containers | List: [Container](#container)   | A list of containers, the first container will be the one where the tasks steps will be executed. Other containers may be defined to provide services needed for the task (a database etc...) |
+| Option     | Type                          | Description                                                                                                                                                                                   |
+| ---------- | ----------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| type       | String                        | Runtime Type (currently only `pod` is supported)                                                                                                                                              |
+| arch       | String                        | Architecture (valid architectures are: `386` `amd64` `arm` `arm64`                                                                                                                            |
+| containers | List: [Container](#container) | A list of containers, the first container will be the one where the tasks steps will be executed. Other containers may be defined to provide services needed for the task (a database etc...) |
 
 ##### Container
 
 | Option      | Type                                                    | Description                                                                        |
 | ----------- | ------------------------------------------------------- | ---------------------------------------------------------------------------------- |
 | image       | String                                                  | Image to use                                                                       |
-| auth        | [Registry Auth](#registry-auth)                         | Registry Authentication                                                            |
 | environment | Map: EnvVarName(String) => EnvVarValue([Value](#value)) | Environment variables to set                                                       |
 | working_dir | String                                                  | Working dir where the entrypoint will be executed (also used for steps in a task)  |
 | user        | String                                                  | The user id or username to use when executing the entrypoint or the task run steps |
@@ -300,13 +300,14 @@ password:
   from_variable: yoursecretpassword
 ```
 
-### Registry Auth
+### Docker Registry Auth
 
-| Option   | Type            | Description                                                          |
-| -------- | --------------- | -------------------------------------------------------------------- |
-| type     | String          | Registry authentication type (currently only `default` is supported) |
-| username | [Value](#value) | Registry username. Can be a string or from a variable                |
-| password | [Value](#value) | Registry password. Can be a string or from a variable                |
+| Option   | Type            | Description                                                                                                        |
+| -------- | --------------- | ------------------------------------------------------------------------------------------------------------------ |
+| type     | String          | Registry authentication type: `basic` (default) or `encodeauth` only `default` is supported)                       |
+| username | [Value](#value) | Registry username. Can be a string or from a variable                                                              |
+| password | [Value](#value) | Registry password. Can be a string or from a variable                                                              |
+| auth     | [Value](#value) | Represents and encoded auth string like the one used in the docker config.json. Can be a string or from a variable |
 
 
 # Examples
