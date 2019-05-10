@@ -42,7 +42,7 @@ function getConfigSidebar(group) {
     {
       title: group,
       collapsable: false,
-      children: ["reference", "workspaces", "caching",
+      children: ["reference", "workspaces", "caching", "docker_registries_auth",
         {
           title: "Examples",
           collapsable: false,
