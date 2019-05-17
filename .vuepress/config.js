@@ -1,5 +1,8 @@
 module.exports = {
   title: "Agola",
+  head: [
+    ['meta', { name: 'go-import', content: 'agola.io/agola git https://github.com/agola-io/agola' }],
+  ],
   themeConfig: {
     //displayAllHeaders: true,
     nav: [
