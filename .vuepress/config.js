@@ -28,7 +28,7 @@ module.exports = {
         {
           title: "Concepts",
           collapsable: false,
-          children: ["concepts/runs", "concepts/workspaces"],
+          children: ["concepts/users_orgs", "concepts/projects", "concepts/runs", "concepts/workspaces"],
         },
         {
           title: "Run Configuration",
