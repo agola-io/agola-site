@@ -3,15 +3,34 @@ module.exports = {
   themeConfig: {
     //displayAllHeaders: true,
     nav: [
-      { text: "Home", link: "/" },
       { text: "Documentation", link: "/doc/" },
-      { text: "External", link: "https://google.com" }
     ],
     sidebar: {
-      "/doc/architecture/": getArchitectureSidebar("Architecture"),
-      "/doc/config/": getConfigSidebar("Config"),
-      "/doc/": getDocSidebar("Doc")
-    }
+      "/doc/": [
+        "",
+        {
+          title: "Concepts",
+          collapsable: false,
+          children: ["concepts/runs", "concepts/workspaces"],
+        },
+        {
+          title: "Run Configuration",
+          collapsable: false,
+          children: ["config/reference", "config/caching", "config/docker_registries_auth",
+            {
+              title: "Examples",
+              collapsable: false,
+              children: ["config/examples/go"],
+            }
+          ]
+        },
+        {
+          title: "Architecture",
+          collapsable: false,
+          children: ["architecture/", "architecture/runservice"]
+        },
+      ],
+    },
   },
   plugins: [
     ["@vuepress/back-to-top", true],
@@ -26,39 +45,3 @@ module.exports = {
     ["@vuepress/notification", true]
   ]
 };
-
-function getDocSidebar(group) {
-  return [
-    {
-      title: group,
-      collapsable: false,
-      children: ["config/", "architecture/"]
-    }
-  ];
-}
-
-function getConfigSidebar(group) {
-  return [
-    {
-      title: group,
-      collapsable: false,
-      children: ["reference", "workspaces", "caching", "docker_registries_auth",
-        {
-          title: "Examples",
-          collapsable: false,
-          children: ["examples/go"],
-        }
-      ]
-    }
-  ];
-}
-
-function getArchitectureSidebar(group) {
-  return [
-    {
-      title: group,
-      collapsable: false,
-      children: ["", "runservice"]
-    }
-  ];
-}

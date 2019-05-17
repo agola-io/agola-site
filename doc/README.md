@@ -1,6 +1,13 @@
 ---
-title: Doc
+title: Introduction
 lang: en-US
 ---
 
-# Agola Documentation
+# Welcome to the Agola Documentation
+
+Here you'll find all the agola documentation
+
+* Concepts
+* User/Orgs/Project setup
+* Runs Configuration
+  * examples
