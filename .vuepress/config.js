@@ -6,6 +6,7 @@ module.exports = {
   ],
   themeConfig: {
     //displayAllHeaders: true,
+    logo: "/agola-logo-name.svg",
     nav: [
       { text: "Documentation", link: "/doc/" },
       {

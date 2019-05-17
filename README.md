@@ -10,8 +10,16 @@ actionLink: /doc/
 
 <style>
 .logo {
-    margin: 0.3rem;
-    height:60px;
+  margin: 0.3rem;
+  height:60px;
+}
+
+.home .hero h1 {
+  display: none;
+}
+
+.navbar .site-name {
+  display: none;
 }
 </style>
 
