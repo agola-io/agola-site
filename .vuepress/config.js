@@ -4,6 +4,20 @@ module.exports = {
     //displayAllHeaders: true,
     nav: [
       { text: "Documentation", link: "/doc/" },
+      {
+        text: 'Learn More',
+        items: [
+          {
+            text: 'About',
+            items: [
+              {
+                text: 'Features',
+                link: '/about/features/'
+              },
+            ]
+          },
+        ]
+      },
     ],
     sidebar: {
       "/doc/": [
