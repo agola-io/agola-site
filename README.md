@@ -1,8 +1,8 @@
 ---
 home: true
-heroText: Agola
+heroText:
 tagline: CI/CD redefined
-heroImage: /agola-logo.svg
+heroImage: /agola-logo-name.svg
 actionText: Get Started
 actionLink: /doc/
 ---
