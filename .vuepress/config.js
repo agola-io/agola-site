@@ -1,3 +1,24 @@
+const glob = require('glob')
+
+const getChildren = function (rootdir, dir) {
+  let childs = []
+  let allChilds = glob.sync(rootdir + '/' + dir + '/*.md')
+
+  allChilds.forEach(child => {
+    // remove "rootdir" and ".md"
+    child = child.slice(rootdir.length + 1, -3)
+    // ignore README
+    if (child.endsWith('README')) {
+      return
+    }
+    childs.push(child)
+  })
+
+  childs.sort()
+
+  return childs
+}
+
 module.exports = {
   title: "Agola",
   head: [
@@ -34,19 +55,21 @@ module.exports = {
         },
         {
           title: "Run Configuration",
+          path: "/doc/config/",
           collapsable: false,
           children: ["config/reference", "config/caching", "config/docker_registries_auth",
             {
               title: "Examples",
               collapsable: false,
-              children: ["config/examples/go"],
+              children: getChildren("doc", "config/examples")
             }
           ]
         },
         {
           title: "Architecture",
+          path: "/doc/architecture/",
           collapsable: false,
-          children: ["architecture/", "architecture/runservice"]
+          children: ["architecture/runservice"]
         },
       ],
     },
