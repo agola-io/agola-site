@@ -11,6 +11,6 @@
   "keywords": [],
   "author": "Simone Gotti (simone.gotti@gmail.com)",
   "dependencies": {
-    "vuepress": "^1.0.0-alpha.48"
+    "vuepress": "^1.0.0"
   }
 }
