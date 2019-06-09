@@ -51,25 +51,36 @@ module.exports = {
         {
           title: "Concepts",
           collapsable: false,
-          children: ["concepts/users_orgs", "concepts/projects", "concepts/runs", "concepts/workspaces"],
+          children: [
+            "concepts/users_orgs",
+            "concepts/projects",
+            "concepts/runs",
+            "concepts/workspaces"
+          ],
         },
         {
           title: "Run Configuration",
           path: "/doc/config/",
           collapsable: false,
-          children: ["config/reference", "config/caching", "config/docker_registries_auth",
+          children: [
+            "config/reference",
+            "config/caching",
+            "config/docker_registries_auth",
             {
               title: "Examples",
               collapsable: false,
               children: getChildren("doc", "config/examples")
-            }
+            },
+            "config/FAQ"
           ]
         },
         {
           title: "Architecture",
           path: "/doc/architecture/",
           collapsable: false,
-          children: ["architecture/runservice"]
+          children: [
+            "architecture/runservice"
+          ]
         },
       ],
     },
