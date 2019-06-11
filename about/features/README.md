@@ -53,7 +53,7 @@ Execute you tasks inside a Kubernetes cluster, local docker etc...
 ## Enhance your git workflow
 Runs definitions are committed inside your git repositories and triggered upon push/tag/pull request.
 
-## Users Local Runs
+## Users Direct Runs
 Execute user runs from your local git repository on agola with just one command (also without the need to commit/push)
 
 

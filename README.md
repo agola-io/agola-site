@@ -55,7 +55,7 @@ actionLink: /doc/
     <p>Runs definitions are committed inside your git repositories and triggered upon push/tag/pull request.</p>
   </div>
   <div class="feature">
-    <h2>Users Local Runs</h2>
+    <h2>Users Direct Runs</h2>
     <p>Execute user runs from your local git repository on agola with just one command (also without the need to commit/push)</p>
   </div>
   <div class="feature">
