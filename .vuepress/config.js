@@ -29,6 +29,7 @@ module.exports = {
     //displayAllHeaders: true,
     logo: "/agola-logo-name.svg",
     nav: [
+      { text: "Try it", link: "/tryit/" },
       { text: "Documentation", link: "/doc/" },
       {
         text: 'Learn More',
@@ -46,6 +47,9 @@ module.exports = {
       },
     ],
     sidebar: {
+      "/tryit/": [
+        ""
+      ],
       "/doc/": [
         "",
         {
