@@ -53,6 +53,15 @@ module.exports = {
       "/doc/": [
         "",
         {
+          title: "Installation",
+          collapsable: false,
+          children: [
+            "installation/config",
+            "installation/standalone",
+            "installation/kubernetes",
+          ],
+        },
+        {
           title: "Concepts",
           collapsable: false,
           children: [
