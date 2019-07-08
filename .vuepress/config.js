@@ -68,7 +68,8 @@ module.exports = {
             "concepts/users_orgs",
             "concepts/projects",
             "concepts/runs",
-            "concepts/workspaces"
+            "concepts/workspaces",
+            "concepts/secrets_variables"
           ],
         },
         {
