@@ -69,7 +69,8 @@ module.exports = {
             "concepts/projects",
             "concepts/runs",
             "concepts/workspaces",
-            "concepts/secrets_variables"
+            "concepts/secrets_variables",
+            "concepts/user_direct_runs"
           ],
         },
         {

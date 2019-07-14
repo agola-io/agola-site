@@ -56,7 +56,7 @@ actionLink: /tryit/
   </div>
   <div class="feature">
     <h2>Users Direct Runs</h2>
-    <p>Execute user runs from your local git repository on agola with just one command (also without the need to commit/push)</p>
+    <p>Execute user runs from your local git repository on agola <a href="/doc/concepts/user_direct_runs.html" class="nav-link action-button">with just one command</a> (also without the need to commit/push)</p>
   </div>
   <div class="feature">
     <p class="action"><a href="/about/features/" class="nav-link action-button">Read More</a></p>
