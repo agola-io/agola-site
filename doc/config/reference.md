@@ -3,31 +3,31 @@ title: Run Configuration Reference
 lang: en-US
 ---
 
-- [Config](#config)
-  - [Config file formats](#config-file-formats)
-- [Global](#global)
-  - [Version](#version)
-  - [Runs](#runs)
-    - [Run](#run)
-      - [Task](#task)
-        - [Depend](#depend)
-        - [Step](#step)
+- [Config](#Config)
+  - [Config file formats](#Config-file-formats)
+- [Global](#Global)
+  - [Version](#Version)
+  - [Runs](#Runs)
+    - [Run](#Run)
+      - [Task](#Task)
+        - [Depend](#Depend)
+        - [Step](#Step)
           - [clone](#clone)
           - [run](#run)
           - [save_to_workspace](#savetoworkspace)
           - [restore_workspace](#restoreworkspace)
           - [save_cache](#savecache)
           - [restore_cache](#restorecache)
-      - [Runtime](#runtime)
-        - [Container](#container)
-  - [Additional types](#additional-types)
-    - [When](#when)
-      - [Example](#example)
-    - [Value](#value)
-      - [As a string](#as-a-string)
-      - [As a project variable](#as-a-project-variable)
-    - [Docker Registry Auth](#docker-registry-auth)
-- [Examples](#examples)
+      - [Runtime](#Runtime)
+        - [Container](#Container)
+  - [Additional types](#Additional-types)
+    - [When](#When)
+      - [Example](#Example)
+    - [Value](#Value)
+      - [As a string](#As-a-string)
+      - [As a project variable](#As-a-project-variable)
+    - [Docker Registry Auth](#Docker-Registry-Auth)
+- [Examples](#Examples)
   - [yaml config](#yaml-config)
   - [jsonnet config](#jsonnet-config)
 
@@ -65,7 +65,7 @@ You're also free to use you own way to generate the config file. Just commit the
 
 ## Version
 
-The config file version. Currently only `v1`.
+The config file version. Currently only `v0`.
 
 
 ## Runs
@@ -315,7 +315,7 @@ password:
 ## yaml config
 
 ``` yaml
-version: v1
+version: v0
 
 runs:
   - name: agola example go run

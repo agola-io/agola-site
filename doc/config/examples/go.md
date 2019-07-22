@@ -8,7 +8,7 @@ lang: en-US
 This example uses the yaml format and defines a run that will fetch the repository source, restore and save a cache of go modules, build and run it
 
 ``` yaml
-version: v1
+version: v0
 
 runs:
   - name: agola example go run
