@@ -25,18 +25,7 @@ serve --embedded-etcd --components all-base,executor
 
 Point your browser to `http://172.17.0.1:8000`
 
-## Using the cli
-
-You can build the agola command locally or just use the image provided agola command. i.e. to create a remote source:
-
-```
-docker run --rm sorintlab/agolademo --token "admintoken" --gateway-url http://172.17.0.1:8000 remotesource create \
---name gitea \
---type gitea \
---api-url http://172.17.0.1:3000 \
---auth-type oauth2
---skip-ssh-host-key-check
-```
+You'll see the main agola ui page with a `Register` and a `Login` button at the top right. But before being able to register and login we should first link agola with at least one remote source (github, gitlab, gitea). See the next steps.
 
 ## Test using a local gitea instance
 
@@ -77,6 +66,8 @@ Your gitea image should be new enough to support oauth2 (if pull a newer image o
 A remote source defines a remote git provider (like gitea, gitlab, github)
 
 Gitea only recently provided a oauth2 provider (https://github.com/go-gitea/gitea/pull/5378). For old version we can just use the old username/password flow to create an user api token (use `--auth-type password` instead of `--auth-type oauth2` in the below command)
+
+The create a remote source we'll use the agola command in cli mode: 
 
 ```
 docker run --rm sorintlab/agolademo --token "admintoken" --gateway-url http://172.17.0.1:8000 remotesource create \
