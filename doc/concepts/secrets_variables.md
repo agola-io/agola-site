@@ -20,7 +20,7 @@ Every project group or project can have some secrets assigned. These secrets can
 Secrets are "inherited" by child projectgroups/projects
 
 ::: warning
-Currently only local secrets are implemented (see the related [enhancement trackingn issue](https://github.com/sgotti/agola/issues/31))
+Currently only local secrets are implemented (see the related [enhancement tracking issue](https://github.com/agola-io/agola/issues/31))
 :::
 
 
