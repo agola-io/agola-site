@@ -3,31 +3,31 @@ title: Run Configuration Reference
 lang: en-US
 ---
 
-- [Config](#Config)
-  - [Config file formats](#Config-file-formats)
-- [Global](#Global)
-  - [Version](#Version)
-  - [Runs](#Runs)
-    - [Run](#Run)
-      - [Task](#Task)
-        - [Depend](#Depend)
-        - [Step](#Step)
+- [Config](#config)
+  - [Config file formats](#config-file-formats)
+- [Global](#global)
+  - [Version](#version)
+  - [Runs](#runs)
+    - [Run](#run)
+      - [Task](#task)
+        - [Depend](#depend)
+        - [Step](#step)
           - [clone](#clone)
           - [run](#run)
           - [save_to_workspace](#savetoworkspace)
           - [restore_workspace](#restoreworkspace)
           - [save_cache](#savecache)
           - [restore_cache](#restorecache)
-      - [Runtime](#Runtime)
-        - [Container](#Container)
-  - [Additional types](#Additional-types)
-    - [When](#When)
-      - [Example](#Example)
-    - [Value](#Value)
-      - [As a string](#As-a-string)
-      - [As a project variable](#As-a-project-variable)
-    - [Docker Registry Auth](#Docker-Registry-Auth)
-- [Examples](#Examples)
+      - [Runtime](#runtime)
+        - [Container](#container)
+  - [Additional types](#additional-types)
+    - [When](#when)
+      - [Example](#example)
+    - [Value](#value)
+      - [As a string](#as-a-string)
+      - [As a project variable](#as-a-project-variable)
+    - [Docker Registry Auth](#docker-registry-auth)
+- [Examples](#examples)
   - [yaml config](#yaml-config)
   - [jsonnet config](#jsonnet-config)
 
@@ -72,11 +72,12 @@ The config file version. Currently only `v0`.
 
 ### Run
 
-| Option                 | Type                                                                                         | Description                           |
-| ---------------------- | -------------------------------------------------------------------------------------------- | ------------------------------------- |
-| name                   | String                                                                                       | Run name                              |
-| tasks                  | List: Task                                                                                   | Run tasks                             |
-| docker_registries_auth | Map: RegistryHost(String) => DockerRegistryAuth([DockerRegistryAuth](#docker-registry-auth)) | Docker registries authentication data |
+| Option                 | Type                                                                                         | Description                                                                                   |
+| ---------------------- | -------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
+| name                   | String                                                                                       | Run name                                                                                      |
+| tasks                  | List: Task                                                                                   | Run tasks                                                                                     |
+| when                   | [When](#when)                                                                                | Conditions to match to execute this run. If the conditions aren't met then the run is skipped |
+| docker_registries_auth | Map: RegistryHost(String) => DockerRegistryAuth([DockerRegistryAuth](#docker-registry-auth)) | Docker registries authentication data                                                         |
 
 #### Task
 
