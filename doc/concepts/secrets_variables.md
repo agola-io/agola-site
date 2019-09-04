@@ -98,7 +98,8 @@ runs:
       - ...
       - name: build docker image
         environment:
-          from_variable: dockerpassword
+          DOCKERAUTH:
+            from_variable: dockerpassword
         steps:
          # Steps to build and push the docker image
          - ...
