@@ -89,6 +89,7 @@ The config file version. Currently only `v0`.
 | environment            | Map: EnvVarName(String) => EnvVarValue([Value](#value))                                      | Environment variables to set                                                                    |
 | working_dir            | String                                                                                       | The working dir where the steps will be executed (defualt: `~/project`)                         |
 | shell                  | String                                                                                       | Shell to use (defaults to `/bin/sh -e`)                                                         |
+| user                   | String                                                                                       | The user id or username to use when executing the task steps                                    |
 | ignore_failure         | Boolean                                                                                      | Don't mark the run as failed if this task is failed                                             |
 | approval               | Boolean                                                                                      | If true the task must be approved before it can start                                           |
 | depends                | List: [Depend](#depend)                                                                      | List of task dependencies and conditions                                                        |
@@ -180,7 +181,6 @@ In this case the run step name will be the same of the command trimmed at the ma
 | environment | Map: EnvVar Name(String) => EnvVar Value(String) | Environment variables to set                                                                                                        |
 | working_dir | String                                           | The working dir where the steps will be executed                                                                                    |
 | shell       | String                                           | Shell to use (defaults to `/bin/sh -e`)                                                                                             |
-| user        | String                                           | The user id or username to use when executing the command                                                                           |
 
 ###### save_to_workspace
 
