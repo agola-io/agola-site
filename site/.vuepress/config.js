@@ -2,7 +2,7 @@ const glob = require('glob')
 
 const getChildren = function (rootdir, dir) {
   let childs = []
-  let allChilds = glob.sync(rootdir + '/' + dir + '/*.md')
+  let allChilds = glob.sync("site/" + rootdir + '/' + dir + '/*.md')
 
   allChilds.forEach(child => {
     // remove "rootdir" and ".md"
