@@ -159,7 +159,20 @@ Examples:
 
 ###### clone
 
-clone clones and checkouts (to the right commit sha) code
+- Short form:
+
+```yaml
+clone:
+```
+
+clone clones and checkouts (to the right commit sha) code.
+
+- Long form:
+
+| Option             | Type | Description                                                      |
+| ------------------ | -----| -----------------------------------------------------------------|
+| depth              | Int  | Clones with `--depth <n>` parameter (defaults to nil)            |
+| recurse_submodules | Bool | Clones with `--recurse-submodules` parameter (defaults to false) |
 
 ###### run
 
