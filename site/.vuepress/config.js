@@ -24,6 +24,7 @@ module.exports = {
   head: [
     ['link', { rel: 'icon', href: '/agola-logo.ico' }],
     ['meta', { name: 'go-import', content: 'agola.io/agola git https://github.com/agola-io/agola' }],
+    ['link', { rel: 'stylesheet', type: 'text/css', href:'https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.css' }] 
   ],
   themeConfig: {
     //displayAllHeaders: true,
