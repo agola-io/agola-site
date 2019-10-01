@@ -1,30 +1,44 @@
-const glob = require('glob')
+const glob = require("glob");
 
-const getChildren = function (rootdir, dir) {
-  let childs = []
-  let allChilds = glob.sync("site/" + rootdir + '/' + dir + '/*.md')
+const getChildren = function(rootdir, dir) {
+  let childs = [];
+  let allChilds = glob.sync("site/" + rootdir + "/" + dir + "/*.md");
 
   allChilds.forEach(child => {
     // remove "rootdir" and ".md"
-    child = child.slice(rootdir.length + 1, -3)
+    child = child.slice(rootdir.length + 1, -3);
     // ignore README
-    if (child.endsWith('README')) {
-      return
+    if (child.endsWith("README")) {
+      return;
     }
-    childs.push(child)
-  })
+    childs.push(child);
+  });
 
-  childs.sort()
+  childs.sort();
 
-  return childs
-}
+  return childs;
+};
 
 module.exports = {
   title: "Agola",
   head: [
-    ['link', { rel: 'icon', href: '/agola-logo.ico' }],
-    ['meta', { name: 'go-import', content: 'agola.io/agola git https://github.com/agola-io/agola' }],
-    ['link', { rel: 'stylesheet', type: 'text/css', href:'https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.css' }] 
+    ["link", { rel: "icon", href: "/agola-logo.ico" }],
+    [
+      "meta",
+      {
+        name: "go-import",
+        content: "agola.io/agola git https://github.com/agola-io/agola"
+      }
+    ],
+    [
+      "link",
+      {
+        rel: "stylesheet",
+        type: "text/css",
+        href:
+          "https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.css"
+      }
+    ]
   ],
   themeConfig: {
     //displayAllHeaders: true,
@@ -33,24 +47,22 @@ module.exports = {
       { text: "Try it", link: "/tryit/" },
       { text: "Documentation", link: "/doc/" },
       {
-        text: 'Learn More',
+        text: "Learn More",
         items: [
           {
-            text: 'About',
+            text: "About",
             items: [
               {
-                text: 'Features',
-                link: '/about/features/'
-              },
+                text: "Features",
+                link: "/about/features/"
+              }
             ]
-          },
+          }
         ]
-      },
+      }
     ],
     sidebar: {
-      "/tryit/": [
-        ""
-      ],
+      "/tryit/": [""],
       "/doc/": [
         "",
         {
@@ -59,8 +71,8 @@ module.exports = {
           children: [
             "installation/config",
             "installation/standalone",
-            "installation/kubernetes",
-          ],
+            "installation/kubernetes"
+          ]
         },
         {
           title: "Concepts",
@@ -72,7 +84,7 @@ module.exports = {
             "concepts/workspaces",
             "concepts/secrets_variables",
             "concepts/user_direct_runs"
-          ],
+          ]
         },
         {
           title: "Run Configuration",
@@ -94,12 +106,10 @@ module.exports = {
           title: "Architecture",
           path: "/doc/architecture/",
           collapsable: false,
-          children: [
-            "architecture/runservice"
-          ]
-        },
-      ],
-    },
+          children: ["architecture/runservice"]
+        }
+      ]
+    }
   },
   plugins: [
     ["@vuepress/back-to-top", true],
@@ -111,6 +121,12 @@ module.exports = {
       }
     ],
     ["@vuepress/medium-zoom", true],
-    ["@vuepress/notification", true]
+    ["@vuepress/notification", true],
+    [
+      "@vuepress/google-analytics",
+      {
+        ga: "UA-141514981-5"
+      }
+    ]
   ]
 };
