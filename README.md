@@ -18,9 +18,8 @@ npm install
 and run the web server locally:
 
 ```
-cd site
-../node_modules/vuepress/cli.js dev
+npm run dev
 ```
 
-It will compile the site, start a small server, and let you know that you can view the site at http://localhost:8081/
+It will compile the site, start a small server, and let you know that you can view the site at http://localhost:8080/
 

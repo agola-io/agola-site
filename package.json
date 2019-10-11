@@ -6,7 +6,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "docs:build": "vuepress build site"
+    "docs:build": "vuepress build site",
+    "dev": "vuepress dev site"
   },
   "keywords": [],
   "author": "Simone Gotti (simone.gotti@gmail.com)",
