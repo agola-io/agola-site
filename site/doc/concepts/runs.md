@@ -17,7 +17,7 @@ Every task can have dependencies from other tasks and tasks can be grouped (comi
 
 ## Step
 
-A step does a specific operation. There are multiple kind of tasks:
+A step does a specific operation. There are multiple kinds of steps:
 
 * clone: clones the git repository and checkouts the right commit
 * run: executes a shell script
