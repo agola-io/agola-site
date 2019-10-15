@@ -2,7 +2,6 @@
 title: Run Configuration Reference
 lang: en-US
 ---
-
 - [Config](#config)
   - [Config file formats](#config-file-formats)
 - [Global](#global)
@@ -20,6 +19,8 @@ lang: en-US
           - [restore_cache](#restorecache)
       - [Runtime](#runtime)
         - [Container](#container)
+          - [Volume](#volume)
+          - [TmpFS Volume](#tmpfs-volume)
   - [Additional types](#additional-types)
     - [When](#when)
       - [Example](#example)
@@ -243,7 +244,7 @@ In this case the run step name will be the same of the command trimmed at the ma
 | Option     | Type                          | Description                                                                                                                                                                                   |
 | ---------- | ----------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | type       | String                        | Runtime Type (currently only `pod` is supported)                                                                                                                                              |
-| arch       | String                        | Architecture (valid architectures are: `386` `amd64` `arm` `arm64`                                                                                                                            |
+| arch       | String                        | Architecture (valid architectures are: `386` `amd64` `arm` `arm64`)                                                                                                                           |
 | containers | List: [Container](#container) | A list of containers, the first container will be the one where the tasks steps will be executed. Other containers may be defined to provide services needed for the task (a database etc...) |
 
 ##### Container
@@ -254,6 +255,41 @@ In this case the run step name will be the same of the command trimmed at the ma
 | environment | Map: EnvVarName(String) => EnvVarValue([Value](#value)) | Environment variables to set                                                       |
 | working_dir | String                                                  | Working dir where the entrypoint will be executed (also used for steps in a task)  |
 | user        | String                                                  | The user id or username to use when executing the entrypoint or the task run steps |
+| volumes     | List: [Volume](#volume)                                 | A list of volumes (currently only `tmpfs` is supported)                            |
+
+###### Volume
+
+Containers can mount one or more volumes (currently only `tmpfs` is supported).
+
+| Option | Type                           | Description  |
+| -------| ------------------------------ | ------------ |
+| path   | String                         | Mountpoint   |
+| tmpfs  | [TmpFS Volume](#tmpfs-volume)  | tmpfs volume |
+
+Example of single volume with size limit:
+```yaml
+  - image: image01
+    volumes:
+      - path: /mnt/tmpfs
+        tmpfs:
+          size: 1Gi
+```
+Example with two volumes, the former with a size limit and the latter without:
+```yaml
+  - image: image01
+    volumes:
+      - path: /mnt/vol1
+        tmpfs:
+          size: 512Mi
+      - path: /mnt/vol2
+        tmpfs: {}
+```
+
+###### TmpFS Volume
+
+| Option | Type   | Description     |
+| -------| ------ | --------------- |
+| size   | String | Filesystem size |
 
 ## Additional types
 
