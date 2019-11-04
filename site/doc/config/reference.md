@@ -195,6 +195,7 @@ In this case the run step name will be the same of the command trimmed at the ma
 | environment | Map: EnvVar Name(String) => EnvVar Value(String) | Environment variables to set                                                                                                        |
 | working_dir | String                                           | The working dir where the steps will be executed                                                                                    |
 | shell       | String                                           | Shell to use (defaults to `/bin/sh -e`)                                                                                             |
+| tty         | Bool                                             | Use a pseudo terminal for command execution (defaults to true)                                                                      |
 
 ###### save_to_workspace
 
