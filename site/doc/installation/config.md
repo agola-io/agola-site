@@ -139,6 +139,8 @@ executor:
   activeTasksLimit: 2
   driver:
     type: docker
+  # allow to run privileged containers
+  allowPrivilegedContainers: false
 
 gitserver:
   # local data directory
