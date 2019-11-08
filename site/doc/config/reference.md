@@ -250,13 +250,14 @@ In this case the run step name will be the same of the command trimmed at the ma
 
 ##### Container
 
-| Option      | Type                                                    | Description                                                                        |
-| ----------- | ------------------------------------------------------- | ---------------------------------------------------------------------------------- |
-| image       | String                                                  | Image to use                                                                       |
-| environment | Map: EnvVarName(String) => EnvVarValue([Value](#value)) | Environment variables to set                                                       |
-| working_dir | String                                                  | Working dir where the entrypoint will be executed (also used for steps in a task)  |
-| user        | String                                                  | The user id or username to use when executing the entrypoint or the task run steps |
-| volumes     | List: [Volume](#volume)                                 | A list of volumes (currently only `tmpfs` is supported)                            |
+| Option      | Type                                                    | Description                                                                                                                                                                                            |
+| ----------- | ------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| image       | String                                                  | Image to use                                                                                                                                                                                           |
+| environment | Map: EnvVarName(String) => EnvVarValue([Value](#value)) | Environment variables to set                                                                                                                                                                           |
+| working_dir | String                                                  | Working dir where the entrypoint will be executed (also used for steps in a task)                                                                                                                      |
+| user        | String                                                  | The user id or username to use when executing the entrypoint or the task run steps                                                                                                                     |
+| volumes     | List: [Volume](#volume)                                 | A list of volumes (currently only `tmpfs` is supported)                                                                                                                                                |
+| privileged  | Bool                                                    | Give extended privileges to this container (defaults to false). [Executors config](/doc/installation/config.md#agola-configuration-file-reference) must have `allowPrivilegedContainers` set to `true` |
 
 ###### Volume
 
