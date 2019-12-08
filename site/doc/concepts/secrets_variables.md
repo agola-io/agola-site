@@ -66,15 +66,24 @@ Then we'll do the same for the staging and production secrets.
 - secret_name: secret-testing
   secret_var: dockerpassword
   when:
-    ref: '#/refs/pull/.*#'
+    ref:
+      include:
+        - type: regexp
+          match: 'refs/pull/*'
 - secret_name: secret-staging
   secret_var: dockerpassword
   when:
-    branch: master
+    branch:
+      include:
+        - type: simple
+          match: 'master'
 - secret_name: secret-production
   secret_var: dockerpassword
   when:
-    tag: '#v1\..*'
+    tag:
+      include:
+        - type: regexp
+          match: 'v1*'
 ```
 
 ``` sh
