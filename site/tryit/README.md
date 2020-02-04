@@ -7,7 +7,6 @@ lang: en-US
 
 The dockerhub `sorintlab/agola-demo` is a demo image to easily test agola, it comes with a predefined configuration that uses an embedded etcd. Don't use it in production but build your own image or use the `sorintlab/agola` image
 
-
 We assume `172.17.0.1` is the docker default network where ports are exported
 
 ## Start
@@ -21,8 +20,7 @@ sorintlab/agolademo \
 serve --embedded-etcd --components all-base,executor
 ```
 where:
-   * `-v=path/to/local/agola/data` is your agola data directory
-   * `-p 8000:8000` is the agola port provisioned
+   * `-v=/path/to/local/agola/data:/data/agola` will mount a local `/path/to/local/agola/data` directory (be sure to change it) to `/data/agola` inside the container
 
 
 ## Connect
@@ -46,34 +44,33 @@ If you have an **ssh server** running locally you should **stop** it
 docker run -d --name gitea -v /path/to/gitea-data:/data -p 3000:3000 -p 22:22 gitea/gitea:latest
 ```
 where:
-   * `-v=path/to/gitea-data` is your gitea data directory
-   * `-p 3000:3000` is the gitea web port provisioned
-   * `-p 22:22` is the gitea ssh port provisioned
+* `-v /path/to/gitea-data:/data` will mount a local `/path/to/gitea-data` directory (be sure to change it) to `/data` inside the container
    
 
 #### Setup gitea
 
 
-**1.** Access gitea on `http://172.17.0.1:3000`
+1. Access gitea on `http://172.17.0.1:3000`
 
-**2.** In the initial setup page you should change:
+2. In the initial setup page you should change:
    * the *Gitea Base URL* to `http://$YOURDOCKERLOCALIP:3000` (i.e. `http://172.17.0.1:3000`)
    * the *SSH Server Domain* to `$YOURDOCKERLOCALIP` (i.e. `172.17.0.1`)
 
-**3.** Register a new user
+3. Register a new user
 
-**4.** Under your user settings, add your `ssh-public-key` (to be able to push to repositories)
+4. Under your user settings, add your `ssh-public-key` (to be able to push to repositories)
 
-::: warning
-Your gitea image should be new enough to support oauth2, if pull a newer image or skip the **next step** . 
- * Gitea Version > 1.8.0 - Have *OAuth2* Authentication
-:::
-
-**5.** Now create an oauth2 app under your user settings -> Applications -> Manage OAuth2 Applications. As the applicatin *name* set "Agola" and as *redirect uri* `http://172.17.0.1:8000/oauth2/callback`. 
+5. Now create an oauth2 app under your user settings -> Applications -> Manage OAuth2 Applications. As the applicatin *name* set "Agola" and as *redirect uri* `http://172.17.0.1:8000/oauth2/callback`. 
 
 ::: warning
 Keep note of the provided ***Client ID*** and ***Client Secret***.
 :::
+
+::: warning
+Your gitea image should be new enough to support oauth2, if pull a newer image or skip the **next step** . 
+* Gitea Version >= 1.8.0  &ensp; - &ensp; Have *OAuth2* Authentication
+:::
+
 
 ### Add a gitea remote source
 
@@ -81,7 +78,7 @@ A remote source defines a remote git provider (like gitea, gitlab, github)
 
 Gitea only recently provided a oauth2 provider (https://github.com/go-gitea/gitea/pull/5378). 
    * For old version you can use the old username/password flow to create an user api token `--auth-type password`
-   * For newer version up to 1.8.0 you can use `--auth-type oauth2`
+   * For newer version from 1.8.0 you can use `--auth-type oauth2`
 
 
 The create a remote source we'll use the agola command in cli mode: 
@@ -97,7 +94,7 @@ docker run --rm sorintlab/agolademo --token "admintoken" --gateway-url http://17
 --skip-ssh-host-key-check
 ```
 
-* `--token`*"admintoken"* is a token defined in the default agolademo configuration and will let you act with the api as an admin without the need of an user created inside agola.
+* `--token "admintoken" ` is a token defined in the default agolademo configuration and will let you act with the api as an admin without the need of an user created inside agola.
 
 * `--skip-ssh-host-key-check` is used to speed up things and tells agola to not check gitea host ssh host key when cloning repositories. The right thing to do will be to provide the ssh host key using the option `--ssh-host-key`. 
 
@@ -122,11 +119,11 @@ Save the **token** since it won't be displayed again.
 
 We'll use the [agola-example-go](https://github.com/agola-io/agola-example-go) repository
 
-**1.** Clone to above repository locally
+1. Clone to above repository locally
 
-**2.** Create a repository on gitea called `agola-example-go`
+2. Create a repository on gitea called `agola-example-go`
 
-**3.** Create a project in agola connected to the gitea repository using the ***web interface*** or the ***cli***:
+3. Create a project in agola connected to the gitea repository using the ***web interface*** or the ***cli***:
 ```
 docker run --rm sorintlab/agolademo --token $TOKEN --gateway-url http://172.17.0.1:8000 project create \
 --parent "user/$AGOLAUSER" \
@@ -136,13 +133,13 @@ docker run --rm sorintlab/agolademo --token $TOKEN --gateway-url http://172.17.0
 ```
 
 where:
-   * `--token` is your agola user api token
-   * `--name` is the agola project associated to your gitea repository that you want to create
-   * `--remote-source` is the remote source providing the repository
-   * `--repo-path` is the remote source repository path
+* `--token` is your agola user api token
+* `--name` is the agola project associated to your gitea repository that you want to create
+* `--remote-source` is the remote source providing the repository
+* `--repo-path` is the remote source repository path
 
 
-**4.** Push the `agola-example-go` repository you've previousy cloned to the gitea repository, for example:
+4. Push the `agola-example-go` repository you've previousy cloned to the gitea repository, for example:
 
 ```
 git remote add mygitea git@172.17.0.1:$GITEAUSER/agola-example-go.git
