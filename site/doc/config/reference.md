@@ -4,6 +4,8 @@ lang: en-US
 ---
 - [Config](#config)
   - [Config file formats](#config-file-formats)
+    - [Jsonnet config format](#jsonnet-config-format)
+    - [Custom config file generation](#custom-config-file-generation)
 - [Agola provided Environment Variables](#agola-provided-environment-variables)
 - [Global](#global)
   - [Version](#version)
@@ -51,9 +53,34 @@ For basic configs you would prefer to use the `yml` syntax but for more complex 
 
 Instead of adding some templating facilities to yaml that will always leave some open unsupported cases and add much more complexity we choosed to push the use of [jsonnet](https://jsonnet.org/) .
 
+### Jsonnet config format
+
 **jsonnet** helps writing a parametrizable and easy to maintain config. See the below matrix build example.
 
 Generating a config with jsonnet keeps the principle of reproducible runs since a jsonnet file will always produce the same output.
+
+**jsonnet** config can also receive a `configuration context` the can be used to dynamically generate the final config. Many things can also be done without this context variables but instead using [When](#when) conditions and the provided agola environment variables.
+
+To use this `configuration context` you should use a main jsonnet function:
+
+``` json
+function(ctx) {
+	// use your context here
+}
+```
+
+The ctx is an object that contains these fields:
+
+| Name            | Description                                                                                                           |
+| --------------- | --------------------------------------------------------------------------------------------------------------------- |
+| ref_type        | The ref type. Can be `branch`, `tag`, `pull_request`.                                                                 |
+| ref             | The git ref (i.e. `refs/heads/master`, `refs/tags/v0.1.0`).                                                           |
+| commit_sha      | The pull request id of this run. Will be an empty string if the run hasn't been triggered by a git branch push event. |
+| branch          | The git commit sha.                                                                                                   |
+| tag             | The git branch. Will be an empty string if the run hasn't been triggered by a git branch push event.                  |
+| pull_request_id | The git tag. Will be an empty string if the run hasn't been triggered by a git tag push event.                        |
+
+### Custom config file generation
 
 You're also free to use you own way to generate the config file. Just commit the final result to git.
 
@@ -472,6 +499,7 @@ local task_build_go(version, arch) = {
   ],
 };
 
+function(ctx)
 {
   runs: [
     {
