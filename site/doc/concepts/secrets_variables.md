@@ -12,25 +12,36 @@ They are designed to achieve multiple goals:
 
 ## Secrets
 
-Every project group or project can have some secrets assigned. These secrets can be:
+Every organization, project group or project can have some secrets assigned. 
+
+Each secret may contain one or more couples key-value, that can be referenced by the variables. 
+
+These secrets can be:
 
 * **local secrets**
 * **remote secrets**: secrets provided by a remote secret manager (like hashicorp vault)
-
-Secrets are "inherited" by child projectgroups/projects
 
 ::: warning
 Currently only local secrets are implemented (see the related [enhancement tracking issue](https://github.com/agola-io/agola/issues/31))
 :::
 
+Secrets are "inherited" by child projectgroups/projects. To add a secret to an organization, you can use the root projectgroup (`-- projectgroup org/{org-name}`).
 
 
 ## Variables
 
-Every project group or project can have some variables defined. Variables can have multiple values and the final value assigned to a run depends on the matched value condition. The variable value references a secret. The first secret with the referenced name starting from the current project and walking up until the root project group will be used. Currently if no secret is found the variable values will be empty.
+Every organization, project group or project can have some variables defined.
 
-Like secrets also variables are "inherited" by child projectgroups/projects
+Each variables will expose only one value to the runs.
 
+A variable can be created with multiple values, each value with its condition (`when`, for `branch`, `ref` or `tag`).
+The final value assigned to a run will be the first matched condition, top to bottom.
+
+The variable value references a secret. The first secret with the referenced name starting from the current project and walking up until the root project group will be used.
+Currently if no secret is found the variable values will be empty.
+
+Variables are "inherited" by child projectgroups/projects.
+To add a variable to an organization, you can use the root projectgroup (`-- projectgroup org/{org-name}`)
 
 ## Example
 
