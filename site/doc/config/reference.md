@@ -305,6 +305,9 @@ When represent a set of conditions to match.
 | tag    | String, List of String or map with keys `include`/`exclude` | Match a tag with the specified conditions    |
 | ref    | String, List of String or map with keys `include`/`exclude` | Match a ref with the specified conditions    |
 
+By default, each option not defined is ignored.
+If you define an `exclude` instead, you have to define an `include` to which the `exclude`s will be applied.
+
 The value provided to branch/tag/ref can be different:
 * A string
 * A list of strings
