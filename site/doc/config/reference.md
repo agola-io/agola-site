@@ -4,6 +4,7 @@ lang: en-US
 ---
 - [Config](#config)
   - [Config file formats](#config-file-formats)
+- [Agola provided Environment Variables](#agola-provided-environment-variables)
 - [Global](#global)
   - [Version](#version)
   - [Runs](#runs)
@@ -12,11 +13,11 @@ lang: en-US
         - [Depend](#depend)
         - [Step](#step)
           - [clone](#clone)
-          - [run](#run)
-          - [save_to_workspace](#savetoworkspace)
-          - [restore_workspace](#restoreworkspace)
-          - [save_cache](#savecache)
-          - [restore_cache](#restorecache)
+          - [run](#run-2)
+          - [save_to_workspace](#save-to-workspace)
+          - [restore_workspace](#restore-workspace)
+          - [save_cache](#save-cache)
+          - [restore_cache](#restore-cache)
       - [Runtime](#runtime)
         - [Container](#container)
           - [Volume](#volume)
@@ -44,7 +45,7 @@ The accepted syntaxes are (checked in this order):
 * **yaml** (`.agola/config.yml`)
 * **json** (`.agola/config.json`)
 
-The config file is quite simple with just some syntactic sugar for easier definitions of some task steps. 
+The config file is quite simple with just some syntactic sugar for easier definitions of some task steps.
 
 For basic configs you would prefer to use the `yml` syntax but for more complex configs we suggest to use the `jsonnet` syntax (see the examples).
 
@@ -56,6 +57,20 @@ Generating a config with jsonnet keeps the principle of reproducible runs since 
 
 You're also free to use you own way to generate the config file. Just commit the final result to git.
 
+# Agola provided Environment Variables
+
+Every agola task step will have some environment variables populated by Agola that can be useful in some tasks steps (they are also used by the `clone` step).
+
+| Name                  | Description                                                                                                           |
+| --------------------- | --------------------------------------------------------------------------------------------------------------------- |
+| CI                    | Set as `true`. Useful for scripts that need to know if they're running inside a CI/CD system.                         |
+| AGOLA_REPOSITORY_URL  | The remote git repository url.                                                                                        |
+| AGOLA_GIT_REF_TYPE    | The ref type. Can be `branch`, `tag`, `pull_request`.                                                                 |
+| AGOLA_GIT_REF         | The git ref (i.e. `refs/heads/master`, `refs/tags/v0.1.0`).                                                           |
+| AGOLA_GIT_COMMITSHA   | The git commit sha.                                                                                                   |
+| AGOLA_GIT_BRANCH      | The git branch. Will be an empty string if the run hasn't been triggered by a git branch push event.                  |
+| AGOLA_GIT_TAG         | The git tag. Will be an empty string if the run hasn't been triggered by a git tag push event.                        |
+| AGOLA_PULL_REQUEST_ID | The pull request id of this run. Will be an empty string if the run hasn't been triggered by a git branch push event. |
 
 # Global
 
@@ -108,8 +123,8 @@ It's also available a short form for specifying a dependency (simpler when using
 
 ```yaml
   depends:
-    - task 01 # depends on task 01 with default condition on_success 
-    - task 02: # depends on task 02 with conditions on_failure, on_skipped 
+    - task 01 # depends on task 01 with default condition on_success
+    - task 02: # depends on task 02 with conditions on_failure, on_skipped
       - on_failure
       - on_skipped
 ```
@@ -171,7 +186,7 @@ clone clones and checkouts (to the right commit sha) code.
 - Long form:
 
 | Option             | Type | Description                                                      |
-| ------------------ | -----| -----------------------------------------------------------------|
+| ------------------ | ---- | ---------------------------------------------------------------- |
 | depth              | Int  | Clones with `--depth <n>` parameter (defaults to nil)            |
 | recurse_submodules | Bool | Clones with `--recurse-submodules` parameter (defaults to false) |
 
@@ -263,10 +278,10 @@ In this case the run step name will be the same of the command trimmed at the ma
 
 Containers can mount one or more volumes (currently only `tmpfs` is supported).
 
-| Option | Type                           | Description  |
-| -------| ------------------------------ | ------------ |
-| path   | String                         | Mountpoint   |
-| tmpfs  | [TmpFS Volume](#tmpfs-volume)  | tmpfs volume |
+| Option | Type                          | Description  |
+| ------ | ----------------------------- | ------------ |
+| path   | String                        | Mountpoint   |
+| tmpfs  | [TmpFS Volume](#tmpfs-volume) | tmpfs volume |
 
 Example of single volume with size limit:
 ```yaml
@@ -290,7 +305,7 @@ Example with two volumes, the former with a size limit and the latter without:
 ###### TmpFS Volume
 
 | Option | Type   | Description     |
-| -------| ------ | --------------- |
+| ------ | ------ | --------------- |
 | size   | String | Filesystem size |
 
 ## Additional types
