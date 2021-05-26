@@ -141,6 +141,23 @@ executor:
     type: docker
   # allow to run privileged containers
   allowPrivilegedContainers: false
+  # initial image used by the task setup phase. By default it'll be
+  # busybox:stable (on dockerhub), to avoid possible pull errors due to
+  # dockerhub limits you can define your own custom init image (it must be a
+  # busybox like image) and optional registry authentication.
+  initImage:
+    image: "busybox:stable"
+    #auth:
+      # auth type: basic or encodedauth
+      #type: "basic"
+      #
+      # basic auth
+      #username: "username"
+      #password: "password"
+      #
+      # encoded auth string
+      #auth: "..."
+
 
 gitserver:
   # local data directory
