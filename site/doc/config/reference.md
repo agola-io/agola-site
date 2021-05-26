@@ -88,7 +88,7 @@ The config file version. Currently only `v0`.
 | runtime                | [Runtime](#runtime)                                                                          | Runtime definition                                                                              |
 | steps                  | List: [Step](#step)                                                                          | Steps definitions                                                                               |
 | environment            | Map: EnvVarName(String) => EnvVarValue([Value](#value))                                      | Environment variables to set                                                                    |
-| working_dir            | String                                                                                       | The working dir where the steps will be executed (defualt: `~/project`)                         |
+| working_dir            | String                                                                                       | The working dir where the steps will be executed (default: `~/project`)                         |
 | shell                  | String                                                                                       | Shell to use (defaults to `/bin/sh -e`)                                                         |
 | user                   | String                                                                                       | The user id or username to use when executing the task steps                                    |
 | ignore_failure         | Boolean                                                                                      | Don't mark the run as failed if this task is failed                                             |
@@ -297,7 +297,7 @@ Example with two volumes, the former with a size limit and the latter without:
 
 ### When
 
-When represent a set of conditions to match
+When represent a set of conditions to match.
 
 | Option | Type                                                        | Description                                  |
 | ------ | ----------------------------------------------------------- | -------------------------------------------- |
@@ -305,12 +305,15 @@ When represent a set of conditions to match
 | tag    | String, List of String or map with keys `include`/`exclude` | Match a tag with the specified conditions    |
 | ref    | String, List of String or map with keys `include`/`exclude` | Match a ref with the specified conditions    |
 
+By default, each option not defined is ignored.
+If you define an `exclude` instead, you have to define an `include` to which the `exclude`s will be applied.
+
 The value provided to branch/tag/ref can be different:
 * A string
 * A list of strings
-* A map with keys `include` and `exclude` and values string or list of string (like above). In this way the branch/ref/tag must be included and not excluded
+* A map with keys `include` and `exclude` and values string or list of string (like above). In this way the branch/tag/ref must be included and not excluded
 
-The provided strings can be a simple string (the value must match that string) or a regular expression (when enclosed in `/` or `#`)
+The provided strings can be a simple string (the value must match that string) or a regular expression (when enclosed in `/` or `#`).
 
 
 #### Example
