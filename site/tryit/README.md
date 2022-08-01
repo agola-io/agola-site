@@ -39,7 +39,7 @@ NOTE: if you have an ssh server running locally you should stop it
 :::
 
 ```
-docker run -d --name gitea -v /path/to/gitea-data:/data -p 3000:3000 -p 22:22 gitea/gitea:latest
+docker run -d --name gitea -v /path/to/gitea-data:/data -e GITEA__webhook__ALLOWED_HOST_LIST=172.17.0.1 -p 3000:3000 -p 22:22 gitea/gitea:latest
 ```
 
 This will save your gitea data inside your host `/path/to/gitea` directory
