@@ -1,6 +1,7 @@
 .DS_Store
 node_modules
-site/.vuepress/dist
+site/.vitepress/dist
+site/.vitepress/cache
 
 # local env files
 .env.local
