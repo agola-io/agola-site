@@ -1,25 +1,91 @@
 ---
-home: true
-heroText:
-tagline: CI/CD redefined
-heroImage: /agola-logo-name.svg
-actionText: Try it now
-actionLink: /tryit/
+layout: home
 ---
 
 
 <style>
-.logo {
+
+a,p a code {
+    color: #f37021;
+}
+
+.home {
+  font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,sans-serif;
+  max-width: 960px;
+  margin: 0 auto;
+  display: block
+}
+
+.home .hero {
+  text-align: center
+}
+
+.home .hero img {
+  max-width: 100%;
+  max-height: 280px;
+  display: block;
+  margin: 3rem auto 1.5rem
+}
+
+.home .hero .description {
+  max-width: 35rem;
+  font-size: 1.6rem;
+  line-height: 1.3;
+  color: #6a8bad;
+  margin: 1.8rem auto;
+}
+
+.home .hero .action-button {
+  display: inline-block;
+  font-size: 1.2rem;
+  color: #fff;
+  background-color: #f37021;
+  padding: .8rem 1.6rem;
+  border-radius: 4px;
+  transition: background-color .1s ease;
+  box-sizing: border-box;
+  border-bottom: 1px solid #ec610d;
+}
+
+.home .logo {
+  display: inline;
   margin: 0.3rem;
   height:60px;
 }
 
-.home .hero h1 {
-  display: none;
+.home .features {
+  border-top: 1px solid #eaecef;
+  padding: 1.2rem 0;
+  margin-top: 2.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  align-content: stretch;
+  justify-content: space-between
 }
 
-.navbar .site-name {
-  display: none;
+.home .feature {
+  flex-grow: 1;
+  flex-basis: 30%;
+  max-width: 30%
+}
+
+.home .feature p {
+  color: #4e6e8e;
+}
+
+.home .feature h2 {
+  display: block;
+  font-size: 1.4rem;
+  font-weight: 500;
+  line-height: 1.25;
+  border-bottom: none;
+  padding-bottom: 0;
+  margin-block-start: 0.83em;
+  margin-block-end: 0.83em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  color: #3a5169;
 }
 
 .center {
@@ -51,6 +117,18 @@ actionLink: /tryit/
   width: 2em;
 }
 </style>
+
+<div class="home">
+<header class="hero"><img src="/agola-logo-name.svg" alt="hero">
+  <p class="description">
+    CI/CD redefined
+  </p>
+  <p class="action">
+    <a href="/tryit/" class="nav-link action-button">
+    Try it now
+    </a>
+  </p>
+</header>
 
 <div class="center">
   <a class="roundedbutton" href="https://github.com/agola-io/agola" target="_blank">
@@ -105,4 +183,5 @@ actionLink: /tryit/
   <div class="feature">
     <p class="action"><a href="/about/features/" class="nav-link action-button">Read More</a></p>
   </div>
+</div>
 </div>
