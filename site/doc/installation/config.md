@@ -74,20 +74,20 @@ notification:
   runserviceURL: "http://runservice:4000"
   configstoreURL: "http://configstore:4002"
 
-  # etcd client configuration
-  etcd:
-    endpoints: "http://youretcd:2379"
-    # etc client tls config
-    #tlsCertFile
-    #tlsKeyFile
-    #tlsCAFile
-    #tlsSkipVerify
+  db:
+    type: sqlite3
+    connString: "/data/agola/notification/db/db"
+    # type: postgres
+    # connString: "postgres://@localhost/agola_notification?sslmode=disable"
 
 configstore:
   dataDir: /data/agola/configstore
 
-  etcd:
-    endpoints: "http://localhost:2379"
+  db:
+    type: sqlite3
+    connString: "/data/agola/configstore/db/db"
+    # type: postgres
+    # connString: "postgres://@localhost/agola_configstore?sslmode=disable"
 
   objectStorage:
     # posix based object storage. It requires a shared posix fs like nfs, chepfs etc...
@@ -109,8 +109,13 @@ configstore:
 runservice:
   #debug: true
   dataDir: /data/agola/runservice
-  etcd:
-    endpoints: "http://localhost:2379"
+
+  db:
+    type: sqlite3
+    connString: "/data/agola/runservice/db/db"
+    # type: postgres
+    # connString: "postgres://@localhost/agola_runservice?sslmode=disable"
+
   objectStorage:
     # posix based object storage. It requires a shared posix fs like nfs, chepfs etc...
     #
