@@ -10,12 +10,14 @@ Since agola is composed of multiple components you can deploy it in many differe
 
 ## Prerequisites
 
-* An etcd cluster
+* A database
+  * PostgreSQL.
+  * sqlite3 (can be used only for single instance deployments)
 * An object storage:
   * A posix shared fs like nfs or cephfs
   * A S3 based storage
 
-Create a configuration file with the correct entries to your etcd, objectstorage and components config (see the [configuration reference](config))
+Create a configuration file with the correct entries to your database, objectstorage and components config (see the [configuration reference](config))
 
 
 ### High available with N executors
@@ -33,5 +35,3 @@ On every "executor" machine:
 ```
 agola serve --config ./config-localhost.yml --components executor
 ```
-
-

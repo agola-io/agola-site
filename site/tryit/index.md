@@ -5,7 +5,7 @@ lang: en-US
 
 ## Agola demo image
 
-The dockerhub `sorintlab/agolademo` is a demo image to easily test agola, it comes with a predefined configuration that uses an embedded etcd. Don't use it in production but build your own image or use the `sorintlab/agola` image
+The dockerhub `sorintlab/agolademo` is a demo image to easily test agola. Don't use it in production but build your own image or use the `sorintlab/agola` image
 
 We assume `172.17.0.1` is the docker default network where ports are exported
 
@@ -17,7 +17,7 @@ docker run \
 -v=/path/to/local/agola/data:/data/agola \
 -p 8000:8000 \
 sorintlab/agolademo \
-serve --embedded-etcd --components all-base,executor
+serve --components all-base,executor
 ```
 
 ## Connect
