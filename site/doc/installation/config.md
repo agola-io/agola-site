@@ -63,6 +63,13 @@ gateway:
     #privateKeyPath: /path/to/privatekey.pem
     #publicKeyPath: /path/to/public.pem
 
+  # cookies signing configuration
+  cookieSigning:
+    key: supersecretsigningkey
+
+  # use unsecureCookies (use for local testing only over non tls)
+  # unsecureCookies: false
+
   # admin token, token to use to do super user agola administration
   adminToken: "changeme"
 
