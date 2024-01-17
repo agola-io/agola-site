@@ -98,6 +98,7 @@ Every agola task step will have some environment variables populated by Agola th
 | AGOLA_GIT_BRANCH      | The git branch. Will be an empty string if the run hasn't been triggered by a git branch push event.                  |
 | AGOLA_GIT_TAG         | The git tag. Will be an empty string if the run hasn't been triggered by a git tag push event.                        |
 | AGOLA_PULL_REQUEST_ID | The pull request id of this run. Will be an empty string if the run hasn't been triggered by a git branch push event. |
+| AGOLA_RUN_COUNTER     | The agola run counter                                                                                                 |
 
 # Global
 
