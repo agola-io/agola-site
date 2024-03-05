@@ -43,9 +43,9 @@ This is the reference of the agola config file format.
 
 The accepted syntaxes are (checked in this order):
 
-* **jsonnet** (`.agola/config.jsonnet`)
-* **yaml** (`.agola/config.yml`)
-* **json** (`.agola/config.json`)
+- **jsonnet** (`.agola/config.jsonnet`)
+- **yaml** (`.agola/config.yml`)
+- **json** (`.agola/config.json`)
 
 The config file is quite simple with just some syntactic sugar for easier definitions of some task steps.
 
@@ -65,7 +65,7 @@ To use this `configuration context` you should use a main jsonnet function:
 
 ``` json
 function(ctx) {
-	// use your context here
+       // use your context here
 }
 ```
 
@@ -98,6 +98,7 @@ Every agola task step will have some environment variables populated by Agola th
 | AGOLA_GIT_BRANCH      | The git branch. Will be an empty string if the run hasn't been triggered by a git branch push event.                  |
 | AGOLA_GIT_TAG         | The git tag. Will be an empty string if the run hasn't been triggered by a git tag push event.                        |
 | AGOLA_PULL_REQUEST_ID | The pull request id of this run. Will be an empty string if the run hasn't been triggered by a git branch push event. |
+| AGOLA_RUN_COUNTER     | The project run counter/number (this is a per-project increasing number)                                              |
 
 # Global
 
@@ -109,7 +110,6 @@ Every agola task step will have some environment variables populated by Agola th
 ## Version
 
 The config file version. Currently only `v0`.
-
 
 ## Runs
 
@@ -156,9 +156,7 @@ It's also available a short form for specifying a dependency (simpler when using
       - on_skipped
 ```
 
-
 ##### Step
-
 
 | Option | Type   | Description |
 | ------ | ------ | ----------- |
@@ -176,11 +174,13 @@ There are different types of steps:
 Every step can have a short form (simpler when using yaml) or a normal form:
 
 - Short form:
+
 ```yaml
    $stepname: $stepdefinition
 ```
 
 Examples:
+
 ```yaml
    run:
      name: "run step"
@@ -188,12 +188,14 @@ Examples:
 ```
 
 - Normal form:
+
 ```yaml
    type: $steptype
    $otherstep fields
 ```
 
 Examples:
+
 ```yaml
    type: run
    name: "run step"
@@ -281,7 +283,6 @@ In this case the run step name will be the same of the command trimmed at the ma
 | keys     | List of String | List of cache key to restore. Every entry is a template to dynamically generate cache keys based on runtime data. See [caching](caching.md). They'll tried in order until a match by prefix of an existing cache key is found, the newest matching key will be restored |
 | dest_dir | String         | Destination dir where to restore the cache                                                                                                                                                                                                                              |
 
-
 #### Runtime
 
 | Option     | Type                          | Description                                                                                                                                                                                   |
@@ -311,6 +312,7 @@ Containers can mount one or more volumes (currently only `tmpfs` is supported).
 | tmpfs  | [TmpFS Volume](#tmpfs-volume) | tmpfs volume |
 
 Example of single volume with size limit:
+
 ```yaml
   - image: image01
     volumes:
@@ -318,7 +320,9 @@ Example of single volume with size limit:
         tmpfs:
           size: 1Gi
 ```
+
 Example with two volumes, the former with a size limit and the latter without:
+
 ```yaml
   - image: image01
     volumes:
@@ -351,12 +355,12 @@ By default, each option not defined is ignored.
 If you define an `exclude` instead, you have to define an `include` to which the `exclude`s will be applied.
 
 The value provided to branch/tag/ref can be different:
-* A string
-* A list of strings
-* A map with keys `include` and `exclude` and values string or list of string (like above). In this way the branch/tag/ref must be included and not excluded
+
+- A string
+- A list of strings
+- A map with keys `include` and `exclude` and values string or list of string (like above). In this way the branch/tag/ref must be included and not excluded
 
 The provided strings can be a simple string (the value must match that string) or a regular expression (when enclosed in `/` or `#`).
-
 
 #### Example
 
@@ -376,9 +380,10 @@ The provided strings can be a simple string (the value must match that string) o
 ```
 
 The task `task01` will be executed only if:
-* we are on a branch with value `master`
-* we are on a tag with value `v1.0` or that matches the regexp `v1\..*` (i.e `v1.0`, `v1.2` but not `v10` or `v2`)
-* we are on a ref that match the regexp `/refs/pull/.*` or the value "/refs/heads/branch01`
+
+- we are on a branch with value `master`
+- we are on a tag with value `v1.0` or that matches the regexp `v1\..*` (i.e `v1.0`, `v1.2` but not `v10` or `v2`)
+- we are on a ref that match the regexp `/refs/pull/.*` or the value "/refs/heads/branch01`
 
 ### Value
 
@@ -405,7 +410,6 @@ password:
 | username | [Value](#value) | Registry username. Can be a string or from a variable                                                              |
 | password | [Value](#value) | Registry password. Can be a string or from a variable                                                              |
 | auth     | [Value](#value) | Represents and encoded auth string like the one used in the docker config.json. Can be a string or from a variable |
-
 
 # Examples
 
