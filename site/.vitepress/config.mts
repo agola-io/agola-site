@@ -14,15 +14,6 @@ export default defineConfig({
         content: "agola.io/agola git https://github.com/agola-io/agola",
       },
     ],
-    [
-      "link",
-      {
-        rel: "stylesheet",
-        type: "text/css",
-        href:
-          "https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.css",
-      },
-    ],
   ],
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
