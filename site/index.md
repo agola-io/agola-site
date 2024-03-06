@@ -2,13 +2,7 @@
 layout: home
 ---
 
-
 <style>
-
-a,p a code {
-    color: #f37021;
-}
-
 .home {
   font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,sans-serif;
   max-width: 960px;
@@ -45,6 +39,7 @@ a,p a code {
   transition: background-color .1s ease;
   box-sizing: border-box;
   border-bottom: 1px solid #ec610d;
+  text-decoration: none;
 }
 
 .home .logo {
@@ -74,7 +69,7 @@ a,p a code {
   color: #4e6e8e;
 }
 
-.home .feature h2 {
+.home .feature .title {
   display: block;
   font-size: 1.4rem;
   font-weight: 500;
@@ -97,17 +92,21 @@ a,p a code {
   display: inline-block;
   margin: 0 2em;
   margin-top: 1em;
-  font-size: 1.05em;
-  font-weight: 600;
-  letter-spacing: 0.1em;
-  text-align: center;
   padding: 0.75em 2em;
-  color: #4f5959;
-  background-color: #f6f6f6;
   border: 1px solid #4fc08d;
   border-radius: 2em;
   border-color: #f6f6f6;
   text-indent: 1.4em;
+}
+
+a.roundedbutton {
+  color: #4f5959;
+  background-color: #f6f6f6;
+  font-size: 1.05em;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-align: center;
+  text-decoration: none;
 }
 
 .roundedbutton svg {
@@ -123,11 +122,11 @@ a,p a code {
   <p class="description">
     CI/CD redefined
   </p>
-  <p class="action">
+  <div>
     <a href="/tryit/" class="nav-link action-button">
     Try it now
     </a>
-  </p>
+  </div>
 </header>
 
 <div class="center">
@@ -148,40 +147,40 @@ a,p a code {
 
 <div class="features">
   <div class="feature">
-    <h2>Containerized, reproducible and restartable Runs</h2>
+    <p class="title">Containerized, reproducible and restartable Runs</p>
     <p>Execute your runs in a reproducible containerized environment. Restart them from start or from failed task</p>
   </div>
   <div class="feature">
-    <h2>Advanced workflows (matrix builds, fan-in, fan-out, multi arch etc...)</h2>
+    <p class="title">Advanced workflows (matrix builds, fan-in, fan-out, multi arch etc...)</p>
     <p>Implement every kind of workflow you want from simple builds to complex deployments.</p>
   </div>
   <div class="feature">
-    <h2>Multiple git sources integrations</h2>
+    <p class="title">Multiple git sources integrations</p>
     <p>GitHub, GitLab, Gitea, custom Git repositories (and more to come)</p>
     <img class="logo" src="/github-logo.svg"/>
     <img class="logo" src="/gitlab-logo.svg"/>
     <img class="logo" src="/gitea-logo.svg"/>
   </div>
   <div class="feature">
-    <h2>Multiple execution platforms</h2>
+    <p class="title">Multiple execution platforms</p>
     <p>Execute you tasks inside a Kubernetes cluster, local docker etc...</p>
     <img class="logo" src="/k8s-logo.svg"/>
     <img class="logo" src="/docker-logo.svg"/>
   </div>
   <div class="feature">
-    <h2>Testable Runs</h2>
+    <p class="title">Testable Runs</p>
     <p>Keep the same Runs definition but use different variables values based on rules to test your runs on multiple environments.</p>
   </div>
   <div class="feature">
-    <h2>Enhance and leverage your git workflow</h2>
+    <p class="title">Enhance and leverage your git workflow</p>
     <p>Runs definitions are committed inside your git repositories and triggered upon push/tag/pull request.</p>
   </div>
   <div class="feature">
-    <h2>Users Direct Runs</h2>
+    <p class="title">Users Direct Runs</p>
     <p>Execute user runs from your local git repository on agola <a href="/doc/concepts/user_direct_runs.html" class="nav-link action-button">with just one command</a> (also without the need to commit/push)</p>
   </div>
   <div class="feature">
-    <p class="action"><a href="/about/features/" class="nav-link action-button">Read More</a></p>
+    <p><a href="/about/features/" class="nav-link action-button">Read More</a></p>
   </div>
 </div>
 </div>

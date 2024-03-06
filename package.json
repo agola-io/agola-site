@@ -3,7 +3,6 @@
   "version": "0.1.0",
   "license": "Apache-2.0",
   "description": "The agola site",
-  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "docs:build": "vitepress build site",
@@ -16,12 +15,7 @@
     "vue-cookie-accept-decline": "^6.1.0"
   },
   "devDependencies": {
-    "@algolia/client-search": "^4.17.0",
-    "vitepress": "1.0.0-alpha.75",
-    "vue": "^3.3.2"
-  },
-  "peerDependencies": {
-    "@algolia/client-search": "^4.17.0",
-    "vue": "^3.3.2"
+    "@algolia/client-search": "^4.22.1",
+    "vitepress": "1.0.0-rc.44"
   }
 }
