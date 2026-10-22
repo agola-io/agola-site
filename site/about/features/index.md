@@ -25,7 +25,7 @@ For example you'd like to test your deployments on different test environments b
 
 This ability is provided by an easy but powerful dynamic variable system: you can define different variable values to be applied to you runs (i.e. test environment endpoints, credentials etc...) based on the branch/tag/ref
 
-In this way you can make your changes to thw runs definition, push it to a test branch (or a pull request). The triggred run will be executed on the environment defined in the related project variables for the branch. If everything is ok you can commit the change to master and have it applied to the production environment without changing a line of your run definition
+In this way you can make your changes to the runs definition, push it to a test branch (or a pull request). The triggered run will be executed on the environment defined in the related project variables for the branch. If everything is ok you can commit the change to master and have it applied to the production environment without changing a line of your run definition
 
 # Restartable runs
 
